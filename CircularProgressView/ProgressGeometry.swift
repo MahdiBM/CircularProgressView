@@ -17,7 +17,7 @@ struct ProgressGeometry {
     let circleAngle: Angle
     /// The angles for the progress arc. (the blue arc)
     let progressAngles: (start: Angle, end: Angle)
-    
+    /// Starting value to be used for a SwiftUI View.
     static let zero: Self = .init(
         progress: 0, radius: 0, angle1: .zero, angle2: .zero,
         lineWidth: 0, rightToLeft: false, offsetAngle: .zero)

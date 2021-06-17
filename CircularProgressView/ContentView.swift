@@ -27,7 +27,10 @@ struct ContentView: View {
     @State var geo: ProgressGeometry = .zero
     
     var body: some View {
-        VStack(spacing: 2) {
+        
+        populateProgressGeometry()
+        
+        return VStack(spacing: 2) {
             /// Progress View
             CircleArc(startAngle: geo.angles.start, endAngle: geo.angles.end, lineWidth: lineWidth)
                 .frame(width: radius * 2, height: radius * 2)
@@ -97,26 +100,20 @@ struct ContentView: View {
             /// Progress == 0 might result in animation errors.
             if newValue == 0 { progress = 0.001 }
         }
-        .onAppear(perform: populateProgressGeometry)
-        .onChange(of: progress) { _ in populateProgressGeometry() }
-        .onChange(of: radius) { _ in populateProgressGeometry() }
-        .onChange(of: angle1) { _ in populateProgressGeometry() }
-        .onChange(of: angle2) { _ in populateProgressGeometry() }
-        .onChange(of: lineWidth) { _ in populateProgressGeometry() }
-        .onChange(of: rightToLeft) { _ in populateProgressGeometry() }
-        .onChange(of: offsetAngle) { _ in populateProgressGeometry() }
     }
     
     func populateProgressGeometry() {
-        self.geo = .init(
-            progress: self.progress,
-            radius: self.radius,
-            angle1: self.angle1,
-            angle2: self.angle2,
-            lineWidth: self.lineWidth,
-            rightToLeft: self.rightToLeft,
-            offsetAngle: self.offsetAngle
-        )
+        DispatchQueue.main.async {
+            self.geo = .init(
+                progress: self.progress,
+                radius: self.radius,
+                angle1: self.angle1,
+                angle2: self.angle2,
+                lineWidth: self.lineWidth,
+                rightToLeft: self.rightToLeft,
+                offsetAngle: self.offsetAngle
+            )
+        }
     }
 }
 
