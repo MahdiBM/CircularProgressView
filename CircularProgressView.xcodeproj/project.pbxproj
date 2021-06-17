@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19192916267AD4E90001ABE7 /* CircleArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19192915267AD4E90001ABE7 /* CircleArc.swift */; };
+		19192918267AD4F70001ABE7 /* CircleOnPerimeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19192917267AD4F70001ABE7 /* CircleOnPerimeter.swift */; };
 		19E663FD2678DEE200898BA9 /* CircularProgressViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E663FC2678DEE200898BA9 /* CircularProgressViewApp.swift */; };
 		19E663FF2678DEE200898BA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E663FE2678DEE200898BA9 /* ContentView.swift */; };
 		19E664012678DEE400898BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19E664002678DEE400898BA9 /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19192915267AD4E90001ABE7 /* CircleArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleArc.swift; sourceTree = "<group>"; };
+		19192917267AD4F70001ABE7 /* CircleOnPerimeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleOnPerimeter.swift; sourceTree = "<group>"; };
 		19E663F92678DEE200898BA9 /* CircularProgressView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircularProgressView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19E663FC2678DEE200898BA9 /* CircularProgressViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressViewApp.swift; sourceTree = "<group>"; };
 		19E663FE2678DEE200898BA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 			children = (
 				19E663FC2678DEE200898BA9 /* CircularProgressViewApp.swift */,
 				19E663FE2678DEE200898BA9 /* ContentView.swift */,
+				19192917267AD4F70001ABE7 /* CircleOnPerimeter.swift */,
+				19192915267AD4E90001ABE7 /* CircleArc.swift */,
 				19E664002678DEE400898BA9 /* Assets.xcassets */,
 				19E664022678DEE400898BA9 /* Preview Content */,
 			);
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19192916267AD4E90001ABE7 /* CircleArc.swift in Sources */,
 				19E663FF2678DEE200898BA9 /* ContentView.swift in Sources */,
+				19192918267AD4F70001ABE7 /* CircleOnPerimeter.swift in Sources */,
 				19E663FD2678DEE200898BA9 /* CircularProgressViewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

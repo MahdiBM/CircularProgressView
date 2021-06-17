@@ -2,7 +2,7 @@
 //  CircularProgressViewApp.swift
 //  CircularProgressView
 //
-//  Created by Mahdi on 6/15/21.
+//  Created by Mahdi
 //
 
 import SwiftUI

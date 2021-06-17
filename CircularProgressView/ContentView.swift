@@ -2,84 +2,114 @@
 //  ContentView.swift
 //  CircularProgressView
 //
-//  Created by Mahdi on 6/15/21.
+//  Created by Mahdi
 //
 
 import SwiftUI
 
 struct ContentView: View {
-    @State var radius: CGFloat = 150
-    @State var degrees1: Double = 45
-    @State var degrees2: Double = 135
-    @State var width: CGFloat = 8
-    var angles: (start: Double, end: Double) {
-        (start: min(degrees1, degrees2), end: max(degrees1, degrees2))
+    /// The Progress.
+    @State var progress: CGFloat = 0.333 /* 0 <= progress <= 1 */
+    /// The radius of the bigger circle everything is drawn on.
+    @State var radius: CGFloat = 120
+    /// Angle number 1.
+    @State var angle1: Angle = .zero
+    /// Angle number 2.
+    @State var angle2: Angle = .radians(.pi * 3 / 2)
+    /// The stroke's width.
+    @State var lineWidth: CGFloat = 8
+    /// Right to left or left to right progressing.
+    @State var rightToLeft = true
+    /// Starting and ending angles of the bigger gray stroke.
+    var angles: (start: Angle, end: Angle) {
+        if angle2 > angle1 { return (angle1, angle2) } else { return (angle2, angle1) }
     }
-    var startAngle: Angle { .degrees(angles.start) }
-    var endAngle: Angle { .degrees(angles.end) }
-    
-    @State var progress: CGFloat = 0.6 /* 0 <= progress <= 1 */
-    var startOffset: CGFloat {
-        ((.pi / 2) - startAngle.radians) / (2 * .pi)
+    /// The arc which is visible and progress-able. (the gray arc)
+    var wholeArc: Angle {
+        angles.end - angles.start
     }
-    var wholeArc: CGFloat {
-        (2 * .pi) - (endAngle - startAngle).radians
+    /// The angle relative to the amount of the progress we had.
+    var progressedAngle: Angle {
+        .radians(wholeArc.radians * progress)
     }
-    var circleOffset: CGSize {
-        let width = sin((2 * .pi * startOffset) + (wholeArc * progress)) * radius
-        let height = cos((2 * .pi * startOffset) + (wholeArc * progress)) * radius
-        return .init(width: width, height: height)
+    /// The angle at which the little circle is drawn. (the green circle)
+    var circleAngle: Angle {
+        rightToLeft ? progressedAngle + angles.start :
+        angles.end - progressedAngle
+    }
+    /// The angles for the progress arc. (the blue arc)
+    var progressAngles: (start: Angle, end: Angle) {
+        rightToLeft ? (start: angles.start, end: circleAngle) :
+        (start: circleAngle, end: angles.end)
     }
     
     var body: some View {
-        VStack {
-            CircleArc(startAngle: startAngle, endAngle: endAngle, lineWidth: width)
+        VStack(spacing: 2) {
+            /// Progress View
+            CircleArc(startAngle: angles.start, endAngle: angles.end, lineWidth: lineWidth)
                 .frame(width: radius * 2, height: radius * 2)
-                .foregroundColor(.blue)
+                .foregroundColor(.gray)
                 .overlay(
-                    Circle()
+                    CircleArc(
+                        startAngle: progressAngles.start,
+                        endAngle: progressAngles.end,
+                        lineWidth: lineWidth
+                    ).foregroundColor(.blue)
+                )
+                .overlay(
+                    CircleOnPerimeter(angle: circleAngle, circleRadius: lineWidth * 2)
                         .foregroundColor(.green)
-                        .frame(width: width * 4)
-                        .offset(circleOffset)
                 )
             
+            /// Controllers
             VStack {
+                HStack {
+                    Button("right to left: \(rightToLeft.description)") {
+                        rightToLeft.toggle()
+                    }
+                    .padding(6)
+                    
+                    Button("toggle progress") {
+                        if progress.rounded(.toNearestOrEven) == 0 {
+                            progress = 1
+                        } else {
+                            progress = 0
+                        }
+                    }
+                    .padding(6)
+                }
+                .font(.headline)
+                
                 Text("progress: \(progress)")
-                Slider(value: $progress, in: 0...1)
+                Slider(value: $progress, in: (0.001)...1)
                 
-                Text("start: \(degrees1)")
-                Slider(value: $degrees1, in: 0...360)
+                Text("\(angle1 > angle2 ? "end" : "start"): \(angle1.degrees)")
+                Slider(value: .init(
+                    get: { angle1.degrees },
+                    set: { angle1 = .degrees($0) }
+                ), in: 0...360)
                 
-                Text("end: \(degrees2)")
-                Slider(value: $degrees2, in: 0...360)
+                Text("\(angle1 > angle2 ? "start" : "end"): \(angle2.degrees)")
+                Slider(value: .init(
+                    get: { angle2.degrees },
+                    set: { angle2 = .degrees($0) }
+                ), in: (0.1)...359.9)
                 
-                Text("width: \(width)")
-                Slider(value: $width, in: 0...80)
+                Text("width: \(lineWidth)")
+                Slider(value: $lineWidth, in: 1...40)
             }
             .padding(.horizontal)
+            
+        }
+        .animation(.easeInOut.speed(0.5))
+        .onChange(of: progress) { newValue in
+            /// Progress == 0 might result in animation errors.
+            if newValue == 0 { progress = 0.001 }
         }
     }
 }
 
-struct CircleArc: Shape {
-    let startAngle: Angle
-    let endAngle: Angle
-    var lineWidth: CGFloat = 8
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.addArc(
-            center: CGPoint(x: rect.midX, y: rect.midY),
-            radius: rect.width / 2,
-            startAngle: startAngle,
-            endAngle: endAngle,
-            clockwise: true
-        )
-        path = path.strokedPath(.init(lineWidth: lineWidth, lineCap: .round))
-        return path
-    }
-}
-
+// Preview Provider
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
