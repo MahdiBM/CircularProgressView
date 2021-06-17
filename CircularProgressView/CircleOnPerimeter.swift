@@ -32,10 +32,10 @@ struct CircleOnPerimeter: Shape {
         /// we give it `circleRadius` amount of `cornerSize`, it'll turn into a circle.
         let cornerSize: CGSize = .init(width: circleRadius, height: circleRadius)
         let rect: CGRect = .init(x: x, y: y, width: circleRadius * 2, height: circleRadius * 2)
-        var path = Path()
-        /// Drawing the circle
-        path.addRoundedRect(in: rect, cornerSize: cornerSize)
-        return path
+        /// Drawing the circle.
+        return Path { path in
+            path.addRoundedRect(in: rect, cornerSize: cornerSize)
+        }
     }
 }
 

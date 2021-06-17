@@ -23,54 +23,24 @@ struct ContentView: View {
     /// The angle to offset `angle.start` and `angles.end` with.
     /// This will just turn the circle to make creating some arcs possible.
     @State var offsetAngle: Angle = .radians(.pi / 4)
-    /// Starting and ending angles of the bigger gray stroke.
-    var angles: (start: Angle, end: Angle) {
-        if angle2 > angle1 {
-            return (angle1 - offsetAngle, angle2 - offsetAngle)
-        } else {
-            return (angle2 - offsetAngle, angle1 - offsetAngle)
-        }
-    }
-    /// The arc which is visible and progress-able. (the gray arc)
-    var wholeArc: Angle {
-        angles.end - angles.start
-    }
-    /// The angle relative to the amount of the progress we had.
-    var progressedAngle: Angle {
-        .radians(wholeArc.radians * progress)
-    }
-    /// The angle at which the little circle is drawn. (the green circle)
-    var circleAngle: Angle {
-        if rightToLeft  {
-            return (progressedAngle + angles.start)
-        } else {
-            return (angles.end - progressedAngle)
-        }
-    }
-    /// The angles for the progress arc. (the blue arc)
-    var progressAngles: (start: Angle, end: Angle) {
-        if rightToLeft {
-            return (start: angles.start, end: circleAngle)
-        } else {
-            return (start: circleAngle, end: angles.end)
-        }
-    }
+    /// The geometry used to draw shapes.
+    @State var geo: ProgressGeometry = .zero
     
     var body: some View {
         VStack(spacing: 2) {
             /// Progress View
-            CircleArc(startAngle: angles.start, endAngle: angles.end, lineWidth: lineWidth)
+            CircleArc(startAngle: geo.angles.start, endAngle: geo.angles.end, lineWidth: lineWidth)
                 .frame(width: radius * 2, height: radius * 2)
                 .foregroundColor(.gray)
                 .overlay(
                     CircleArc(
-                        startAngle: progressAngles.start,
-                        endAngle: progressAngles.end,
+                        startAngle: geo.progressAngles.start,
+                        endAngle: geo.progressAngles.end,
                         lineWidth: lineWidth
                     ).foregroundColor(.blue)
                 )
                 .overlay(
-                    CircleOnPerimeter(angle: circleAngle, circleRadius: lineWidth * 2)
+                    CircleOnPerimeter(angle: geo.circleAngle, circleRadius: lineWidth * 2)
                         .foregroundColor(.green)
                 )
             
@@ -127,6 +97,26 @@ struct ContentView: View {
             /// Progress == 0 might result in animation errors.
             if newValue == 0 { progress = 0.001 }
         }
+        .onAppear(perform: populateProgressGeometry)
+        .onChange(of: progress) { _ in populateProgressGeometry() }
+        .onChange(of: radius) { _ in populateProgressGeometry() }
+        .onChange(of: angle1) { _ in populateProgressGeometry() }
+        .onChange(of: angle2) { _ in populateProgressGeometry() }
+        .onChange(of: lineWidth) { _ in populateProgressGeometry() }
+        .onChange(of: rightToLeft) { _ in populateProgressGeometry() }
+        .onChange(of: offsetAngle) { _ in populateProgressGeometry() }
+    }
+    
+    func populateProgressGeometry() {
+        self.geo = .init(
+            progress: self.progress,
+            radius: self.radius,
+            angle1: self.angle1,
+            angle2: self.angle2,
+            lineWidth: self.lineWidth,
+            rightToLeft: self.rightToLeft,
+            offsetAngle: self.offsetAngle
+        )
     }
 }
 

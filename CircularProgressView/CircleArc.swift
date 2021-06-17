@@ -17,18 +17,19 @@ struct CircleArc: Shape {
     var lineWidth: CGFloat
     
     func path(in rect: CGRect) -> Path {
-        var path = Path()
-        /// Don't really know why is that, but to draw a pod-clockwise arc from
-        /// `startAngle` to `endAngle` you need to pass their negative values.
-        path.addArc(
-            center: CGPoint(x: rect.midX, y: rect.midY),
-            radius: rect.width / 2,
-            startAngle: -startAngle,
-            endAngle: -endAngle,
-            clockwise: true
-        )
-        path = path.strokedPath(.init(lineWidth: lineWidth, lineCap: .round))
-        return path
+        Path { path in
+            /// Don't really know why, but to draw a pod-clockwise arc from
+            /// `startAngle` to `endAngle` you need to pass their negative values
+            /// with `clockwise` set to `true`.
+            path.addArc(
+                center: CGPoint(x: rect.midX, y: rect.midY),
+                radius: rect.width / 2,
+                startAngle: -startAngle,
+                endAngle: -endAngle,
+                clockwise: true
+            )
+            path = path.strokedPath(.init(lineWidth: lineWidth, lineCap: .round))
+        }
     }
 }
 

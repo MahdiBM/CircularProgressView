@@ -13,6 +13,7 @@
 		19E663FF2678DEE200898BA9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E663FE2678DEE200898BA9 /* ContentView.swift */; };
 		19E664012678DEE400898BA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19E664002678DEE400898BA9 /* Assets.xcassets */; };
 		19E664042678DEE400898BA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19E664032678DEE400898BA9 /* Preview Assets.xcassets */; };
+		19E98B9F267B72FE0010EF6C /* ProgressGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E98B9E267B72FE0010EF6C /* ProgressGeometry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		19E663FE2678DEE200898BA9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		19E664002678DEE400898BA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19E664032678DEE400898BA9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		19E98B9E267B72FE0010EF6C /* ProgressGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressGeometry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				19E663FE2678DEE200898BA9 /* ContentView.swift */,
 				19192917267AD4F70001ABE7 /* CircleOnPerimeter.swift */,
 				19192915267AD4E90001ABE7 /* CircleArc.swift */,
+				19E98B9E267B72FE0010EF6C /* ProgressGeometry.swift */,
 				19E664002678DEE400898BA9 /* Assets.xcassets */,
 				19E664022678DEE400898BA9 /* Preview Content */,
 			);
@@ -146,6 +149,7 @@
 				19192916267AD4E90001ABE7 /* CircleArc.swift in Sources */,
 				19E663FF2678DEE200898BA9 /* ContentView.swift in Sources */,
 				19192918267AD4F70001ABE7 /* CircleOnPerimeter.swift in Sources */,
+				19E98B9F267B72FE0010EF6C /* ProgressGeometry.swift in Sources */,
 				19E663FD2678DEE200898BA9 /* CircularProgressViewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
