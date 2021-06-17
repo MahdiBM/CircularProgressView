@@ -51,7 +51,7 @@ struct ContentView: View {
                     Image(systemName: "airplane")
                         .resizable()
                         .frame(maxWidth: geo.indicatorRadius, maxHeight: geo.indicatorRadius)
-                        .rotationEffect(.radians(.pi))
+                        .rotationEffect(geo.circleAngle)
                         .foregroundColor(.red)
                         .offset(x: radius)
                         .rotationEffect(-geo.circleAngle)
