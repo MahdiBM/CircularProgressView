@@ -13,16 +13,16 @@ struct ContentView: View {
     /// The radius of the bigger circle everything is drawn on.
     @State var radius: CGFloat = 120
     /// Angle number 1.
-    @State var angle1: Angle = .radians(.pi / 2)
+    @State var angle1: Angle = .zero
     /// Angle number 2.
-    @State var angle2: Angle = .radians(2 * .pi)
+    @State var angle2: Angle = .radians(3 * .pi / 2)
     /// The stroke's width.
     @State var lineWidth: CGFloat = 8
     /// Right to left or left to right progressing.
     @State var rightToLeft = false
     /// The angle to offset `angle.start` and `angles.end` with.
     /// This will just turn the circle to make creating some arcs possible.
-    @State var offsetAngle: Angle = .radians(.pi * 3 / 4)
+    @State var offsetAngle: Angle = .radians(.pi / 4)
     /// Starting and ending angles of the bigger gray stroke.
     var angles: (start: Angle, end: Angle) {
         if angle2 > angle1 {
@@ -41,13 +41,19 @@ struct ContentView: View {
     }
     /// The angle at which the little circle is drawn. (the green circle)
     var circleAngle: Angle {
-        rightToLeft ? progressedAngle + angles.start :
-        angles.end - progressedAngle
+        if rightToLeft  {
+            return (progressedAngle + angles.start)
+        } else {
+            return (angles.end - progressedAngle)
+        }
     }
     /// The angles for the progress arc. (the blue arc)
     var progressAngles: (start: Angle, end: Angle) {
-        rightToLeft ? (start: angles.start, end: circleAngle) :
-        (start: circleAngle, end: angles.end)
+        if rightToLeft {
+            return (start: angles.start, end: circleAngle)
+        } else {
+            return (start: circleAngle, end: angles.end)
+        }
     }
     
     var body: some View {
