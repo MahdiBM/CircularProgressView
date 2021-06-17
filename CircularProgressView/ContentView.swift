@@ -44,11 +44,13 @@ struct ContentView: View {
                     ).foregroundColor(.blue)
                 )
                 .overlay(
-                    CircleOnPerimeter(angle: geo.circleAngle, circleRadius: lineWidth * 2)
+                    CircleOnPerimeter(angle: geo.circleAngle, circleRadius: geo.indicatorRadius)
                         .foregroundColor(.green)
                 )
                 .overlay(
                     Image(systemName: "airplane")
+                        .resizable()
+                        .frame(maxWidth: geo.indicatorRadius, maxHeight: geo.indicatorRadius)
                         .rotationEffect(.radians(.pi))
                         .foregroundColor(.red)
                         .offset(x: radius)

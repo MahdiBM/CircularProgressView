@@ -17,6 +17,8 @@ struct ProgressGeometry {
     let circleAngle: Angle
     /// The angles of the progress arc. (the blue arc stroke)
     let progressAngles: (start: Angle, end: Angle)
+    /// Radius of the progress indicator.
+    let indicatorRadius: CGFloat
     /// Starting value to be used for a SwiftUI View.
     static let zero: Self = .init(
         progress: 0, radius: 0, angle1: .zero, angle2: .zero,
@@ -55,10 +57,12 @@ struct ProgressGeometry {
                 return (start: circleAngle, end: angles.end)
             }
         }()
+        let indicatorRadius = lineWidth * 2
         
         self.angles = angles
         self.progressedAngle = progressedAngle
         self.circleAngle = circleAngle
         self.progressAngles = progressAngles
+        self.indicatorRadius = indicatorRadius
     }
 }
