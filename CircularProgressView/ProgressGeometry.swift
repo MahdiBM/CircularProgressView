@@ -44,7 +44,7 @@ struct ProgressGeometry {
         let wholeArc: Angle = angles.end - angles.start
         let progressedAngle: Angle = .radians(wholeArc.radians * progress)
         let circleAngle: Angle = {
-            if rightToLeft  {
+            if rightToLeft {
                 return (progressedAngle + angles.start)
             } else {
                 return (angles.end - progressedAngle)

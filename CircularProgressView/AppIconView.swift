@@ -29,11 +29,11 @@ struct AppIconView: View {
                     .foregroundColor(.blue)
             )
             .overlay(
-                CircleOnPerimeter(
-                    angle: .radians(.pi * 4 / 5),
-                    circleRadius: 20
-                )
+                Circle()
+                    .frame(width: 20, height: 20)
                     .foregroundColor(.green)
+                    .offset(x: radius)
+                    .rotationEffect(-.radians(.pi * 4 / 5))
             )
             .overlay(
                 Image(systemName: "airplane")
