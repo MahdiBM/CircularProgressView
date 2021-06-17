@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// The view used to make the app's icon.
 struct AppIconView: View {
     
     let radius = UIScreen.main.bounds.width * 2 / 5
