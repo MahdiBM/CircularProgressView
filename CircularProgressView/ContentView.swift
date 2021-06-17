@@ -47,6 +47,13 @@ struct ContentView: View {
                     CircleOnPerimeter(angle: geo.circleAngle, circleRadius: lineWidth * 2)
                         .foregroundColor(.green)
                 )
+                .overlay(
+                    Image(systemName: "airplane")
+                        .rotationEffect(.radians(.pi))
+                        .foregroundColor(.red)
+                        .offset(x: radius)
+                        .rotationEffect(-geo.circleAngle)
+                )
             
             /// Controllers
             VStack {
@@ -103,7 +110,7 @@ struct ContentView: View {
         }
     }
     
-    func populateProgressGeometry() {
+    private func populateProgressGeometry() {
         DispatchQueue.main.async {
             self.geo = .init(
                 progress: self.progress,

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-/// Draws a circle on the perimeter of it's frame's biggest-centered circle.
+/// Draws a circle on the perimeter of its frame's biggest-centered circle.
 struct CircleOnPerimeter: Shape {
     /// The angle at which the circle will be drawn.
     var angle: Angle
-    /// Radius of this circle
+    /// Radius of this circle.
     let circleRadius: CGFloat
     
     func path(in rect: CGRect) -> Path {

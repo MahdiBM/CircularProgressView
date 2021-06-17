@@ -2,7 +2,7 @@
 //  ProgressGeometry.swift
 //  CircularProgressView
 //
-//  Created by Mahdi mac
+//  Created by Mahdi
 //
 
 import SwiftUI
