@@ -25,11 +25,11 @@ struct CircleOnPerimeter: Shape {
         /// `+ (.pi / 2)` is to set the starting point to right hand side of the frame.
         /// Because `CircleArc` uses that starting point as well, and also thats the
         /// correct point (at least for my calculations).
-        /// Without `+ (.pi / 2)` the starting point we'll be the bottom point of the frame.
+        /// Without `+ (.pi / 2)` the starting point will be the bottom point of the frame.
         let x = sin(angle.radians + (.pi / 2)) * radius - distanceFromMiddle
         let y = cos(angle.radians + (.pi / 2)) * radius - distanceFromMiddle
-        /// The below rounded rectangle has `circleRadius * 2` width and height, and
-        /// so if we give it `circleRadius` amount of `cornerSize`, it'll turn into a circle.
+        /// The below rounded rectangle has `circleRadius * 2` width and height, so if
+        /// we give it `circleRadius` amount of `cornerSize`, it'll turn into a circle.
         let cornerSize: CGSize = .init(width: circleRadius, height: circleRadius)
         let rect: CGRect = .init(x: x, y: y, width: circleRadius * 2, height: circleRadius * 2)
         var path = Path()
