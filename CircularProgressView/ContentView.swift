@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    /// The Progress.
-    @State var progress: CGFloat = 0.333 /* 0 <= progress <= 1 */
     /// The radius of the bigger circle everything is drawn on.
-    @State var radius: CGFloat = 120
+    let radius: CGFloat = 120
+    /// The Progress.
+    @State private var progress: CGFloat = 0.333 /* 0 <= progress <= 1 */
     /// Angle number 1.
-    @State var angle1: Angle = .zero
+    @State private var angle1: Angle = .zero
     /// Angle number 2.
-    @State var angle2: Angle = .radians(3 * .pi / 2)
+    @State private var angle2: Angle = .radians(3 * .pi / 2)
     /// The stroke's width.
-    @State var lineWidth: CGFloat = 8
+    @State private var lineWidth: CGFloat = 8
     /// Right to left or left to right progressing.
-    @State var rightToLeft = false
+    @State private var rightToLeft: Bool = false
     /// The angle to offset `angle.start` and `angles.end` with.
     /// This will just turn the circle to make creating some arcs possible.
-    @State var offsetAngle: Angle = .radians(.pi / 4)
+    @State private var offsetAngle: Angle = .radians(.pi / 4)
     /// The geometry used to draw shapes.
-    @State var geo: ProgressGeometry = .zero
+    @State private var geo: ProgressGeometry = .zero
     
     var body: some View {
         
