@@ -5,17 +5,17 @@
 //  Created by Mahdi mac
 //
 
-import Foundation
 import SwiftUI
 
+/// Container of geometry info that are used to make the progress-view.
 struct ProgressGeometry {
-    
+    /// Angles of the big-gray-arc-stroke.
     let angles: (start: Angle, end: Angle)
     /// The angle relative to the amount of the progress we had.
     let progressedAngle: Angle
     /// The angle at which the little circle is drawn. (the green circle)
     let circleAngle: Angle
-    /// The angles for the progress arc. (the blue arc)
+    /// The angles of the progress arc. (the blue arc stroke)
     let progressAngles: (start: Angle, end: Angle)
     /// Starting value to be used for a SwiftUI View.
     static let zero: Self = .init(

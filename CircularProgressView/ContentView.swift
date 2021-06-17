@@ -31,6 +31,7 @@ struct ContentView: View {
         populateProgressGeometry()
         
         return VStack(spacing: 2) {
+            
             /// Progress View
             CircleArc(startAngle: geo.angles.start, endAngle: geo.angles.end, lineWidth: lineWidth)
                 .frame(width: radius * 2, height: radius * 2)
@@ -115,6 +116,7 @@ struct ContentView: View {
             )
         }
     }
+    
 }
 
 // Preview Provider
