@@ -20,7 +20,7 @@ struct CircleArc: Shape {
         Path { path in
             /// Don't really know why, but to draw a pod-clockwise arc from
             /// `startAngle` to `endAngle` you need to pass their negative values
-            /// with `clockwise` set to `true`.
+            /// with `clockwise` set to `true`. (apple's fault)
             path.addArc(
                 center: CGPoint(x: rect.midX, y: rect.midY),
                 radius: rect.width / 2,

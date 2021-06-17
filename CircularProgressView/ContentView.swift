@@ -50,7 +50,7 @@ struct ContentView: View {
                         .foregroundColor(.green)
                         .offset(x: radius)
                     /// My calculations are pod-clockwise, but `rotationEffect(_:)` works
-                    /// clockwise, that the reason of the `-` sign.
+                    /// clockwise (apple's fault), that the reason of the `-` sign.
                         .rotationEffect(-geo.circleAngle)
                 )
                 .overlay(
@@ -63,7 +63,7 @@ struct ContentView: View {
                         .foregroundColor(.red)
                         .offset(x: radius)
                     /// My calculations are pod-clockwise, but `rotationEffect(_:)` works
-                    /// clockwise, that the reason of the `-` sign.
+                    /// clockwise (apple's fault), that the reason of the `-` sign.
                         .rotationEffect(-geo.circleAngle)
                 )
             
